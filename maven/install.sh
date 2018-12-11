@@ -1,3 +1,3 @@
 #!/bin/bash
-
-mvn -s .scripts/maven/settings.xml -B verify
+set -ev
+mvn -s .scripts/maven/settings.xml -DskipTests=true -Dmaven.javadoc.skip=true -B verify

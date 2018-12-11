@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -ev
 # master
 if [[ $TRAVIS_BRANCH = master && $TRAVIS_PULL_REQUEST = false ]]; then
     mvn -s .scripts/maven/settings.xml clean install
