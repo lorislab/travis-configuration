@@ -1,6 +1,6 @@
 require 'travis'
 Travis.access_token = ENV['TRAVIS_TOKEN']
-repos = Travis::Repository.find_all(owner_name: 'lorislab')
+repos = Travis::Pro::Repository.find_all(owner_name: 'lorislab')
 	.reject{|repo| repo.slug == 'lorislab/travis-configuration'}
 	.select{|repo| Travis.user.admin_access.include?(repo)}
 keys = ['BINTRAY_API_KEY']
