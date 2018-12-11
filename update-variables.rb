@@ -1,5 +1,5 @@
 require 'travis'
-Travis.access_token = ENV['TRAVIS_TOKEN']
+Travis::Pro.access_token = ENV['TRAVIS_TOKEN']
 repos = Travis::Pro::Repository.find_all(owner_name: 'lorislab')
 	.reject{|repo| repo.slug == 'lorislab/travis-configuration'}
 	.select{|repo| Travis.user.admin_access.include?(repo)}
