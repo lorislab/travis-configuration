@@ -6,7 +6,7 @@ repos = Travis::Pro::Repository.find_all(owner_name: 'lorislab')
 keys = ['BINTRAY_API_KEY']
 repos.each do |repo|
 	keys.each do |key|
-		puts "Setting env var '#{key}' on project '#{repo.slug}'"
+		puts "Setting env var '#{key}' on project '#{repo.slug}' build '#{repo.last_build_number}'"
 		repo.env_vars.upsert(key, "'#{ENV[key]}'", public: false)
 	end
 end
