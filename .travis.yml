@@ -1,0 +1,4 @@
+sudo: false
+script:
+  - gem install travis
+  - ruby update-variables.rb
