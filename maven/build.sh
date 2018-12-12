@@ -1,7 +1,7 @@
 #!/bin/bash
 set -ev
 
-export VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+export VERSION=`$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)`
 # change version
 if [[ $TRAVIS_BRANCH = master && $TRAVIS_PULL_REQUEST = false ]]; then
     export VERSION=${VERSION%%-*}
