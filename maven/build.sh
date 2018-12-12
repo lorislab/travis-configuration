@@ -4,9 +4,7 @@ set -ev
 export MAVEN_CLI_OPTS="-s .scripts/maven/settings.xml --batch-mode --errors --fail-at-end --show-version"
 
 
-mvn help:evaluate -Dexpression=project.version -q -DforceStdout
-
-export BUILD_VERSION=$(mvn org.apache.maven.plugins:maven-help-plugin:3.1.0:evaluate -Dexpression=project.version -q -DforceStdout)
+export BUILD_VERSION=$(mvn help:evaluate -N -Dexpression=project.version|grep -v '\[')
 
 # change version
 if [[ $TRAVIS_BRANCH = master && $TRAVIS_PULL_REQUEST = false ]]; then
