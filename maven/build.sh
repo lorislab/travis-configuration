@@ -3,6 +3,8 @@ set -ev
 
 export MAVEN_CLI_OPTS="-s .scripts/maven/settings.xml --batch-mode --errors --fail-at-end --show-version"
 
+mvn -Dplugin=org.apache.maven.plugins:maven-help-plugin help:describe
+
 export BUILD_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
 
 # change version
