@@ -1,17 +1,21 @@
 #!/bin/bash
 set -ev
 
-export VERSION=`$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)`
+export MAVEN_CLI_OPTS="-s .scripts/maven/settings.xml --batch-mode --errors --fail-at-end --show-version"
+
+export BUILD_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+
 # change version
 if [[ $TRAVIS_BRANCH = master && $TRAVIS_PULL_REQUEST = false ]]; then
-    export VERSION=${VERSION%%-*}
+    BUILD_VERSION=${BUILD_VERSION%%-*}
+    mvn $MAVEN_CLI_OPTS versions:set -DnewVersion=$BUILD_VERSION -q
 fi
-echo "Build version $VERSION"
+echo $BUILD_VERSION
 
 # build
-mvn -s .scripts/maven/settings.xml clean install
+mvn $MAVEN_CLI_OPTS clean package
 
 # deploy
 if [[ ( $TRAVIS_BRANCH = master || $TRAVIS_BRANCH = develop) && $TRAVIS_PULL_REQUEST = false ]]; then
-    mvn -s .scripts/maven/settings.xml deploy
+    mvn $MAVEN_CLI_OPTS -Dmaven.test.skip=true deploy
 fi
