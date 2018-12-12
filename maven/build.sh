@@ -1,18 +1,17 @@
 #!/bin/bash
 set -ev
-# master
+
+export VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+# change version
 if [[ $TRAVIS_BRANCH = master && $TRAVIS_PULL_REQUEST = false ]]; then
-    mvn -s .scripts/maven/settings.xml clean install
-    mvn -s .scripts/maven/settings.xml deploy
+    export VERSION=${VERSION%%-*}
 fi
+echo "Build version $VERSION"
 
-# develop
-if [[ $TRAVIS_BRANCH = develop && $TRAVIS_PULL_REQUEST = false ]]; then
-    mvn -s .scripts/maven/settings.xml clean install
+# build
+mvn -s .scripts/maven/settings.xml clean install
+
+# deploy
+if [[ ( $TRAVIS_BRANCH = master || $TRAVIS_BRANCH = develop) && $TRAVIS_PULL_REQUEST = false ]]; then
     mvn -s .scripts/maven/settings.xml deploy
-fi
-
-# other
-if [[ $TRAVIS_BRANCH != master && $TRAVIS_BRANCH != develop && $TRAVIS_PULL_REQUEST = false ]]; then
-    mvn -s .scripts/maven/settings.xml clean install
 fi
