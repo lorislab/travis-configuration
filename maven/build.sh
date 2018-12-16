@@ -14,9 +14,9 @@ fi
 echo $BUILD_VERSION
 
 # build
-mvn $MAVEN_CLI_OPTS clean package
+mvn $MAVEN_CLI_OPTS -Prelease clean package
 
 # deploy
 if [[ ( $TRAVIS_BRANCH = master || $TRAVIS_BRANCH = develop) && $TRAVIS_PULL_REQUEST = false ]]; then
-    mvn $MAVEN_CLI_OPTS -Dmaven.test.skip=true deploy
+    mvn $MAVEN_CLI_OPTS -Prelease -Dmaven.test.skip=true deploy
 fi
