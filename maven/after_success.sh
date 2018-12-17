@@ -5,5 +5,5 @@ export MAVEN_CLI_OPTS="-s .scripts/maven/settings.xml --batch-mode --errors --fa
 
 # develop
 if [[ ( $TRAVIS_BRANCH = develop ) && $TRAVIS_PULL_REQUEST = false ]]; then
-    mvn $MAVEN_CLI_OPTS com.gavinmogan:codacy-maven-plugin:coverage -DcoverageReportFile=target/site/jacoco/jacoco.xml -DapiToken=$CODACY_TOKEN
+    mvn $MAVEN_CLI_OPTS com.gavinmogan:codacy-maven-plugin:coverage -DcoverageReportFile=target/site/jacoco/jacoco.xml
 fi
