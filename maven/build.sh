@@ -13,6 +13,11 @@ if [[ $TRAVIS_BRANCH = master && $TRAVIS_PULL_REQUEST = false ]]; then
 fi
 echo $BUILD_VERSION
 
+git config --global user.email "lorislab@lorislab.org"
+git config --global user.name "lorislab"
+git tag $BUILD_VERSION -a -m "$BUILD_VERSION"
+git push origin $TRAVIS_BRANCH --tags 2>&1
+
 # build
 mvn $MAVEN_CLI_OPTS -Prelease clean package
 
