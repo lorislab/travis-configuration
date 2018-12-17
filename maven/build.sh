@@ -17,7 +17,6 @@ git config --global user.email "lorislab@lorislab.org"
 git config --global user.name "lorislab"
 git tag $BUILD_VERSION -a -m "$BUILD_VERSION"
 
-git push origin $TRAVIS_BRANCH --tags 2>&1
 git push --quiet https://$GITHUB_TOKEN@github.com/$TRAVIS_REPO_SLUG $BUILD_VERSION > /dev/null 2>&1
 
 # build
