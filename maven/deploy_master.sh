@@ -2,6 +2,7 @@
 set -ev
 
 export MAVEN_CLI_OPTS="-s .scripts/maven/settings.xml --batch-mode --errors --fail-at-end --show-version"
+export BUILD_VERSION=$(mvn help:evaluate -N -Dexpression=project.version|grep -v '\[')
 
 echo "###############"
 echo $BUILD_VERSION
