@@ -4,7 +4,7 @@ repos = Travis::Pro::Repository.find_all(member: Travis::Pro::User.current.login
 	.reject{|repo| repo.slug == 'lorislab/travis-configuration'}
 	.select{|repo| Travis::Pro::User.current.admin_access?(repo)}
 
-keys = ['BINTRAY_API_KEY','GITHUB_TOKEN','CODACY_API_TOKEN']
+keys = ['BINTRAY_API_KEY','GITHUB_TOKEN','CODACY_API_TOKEN','GITHUB_USERNAME','GITHUB_EMAIL']
 
 repos.each do |repo|
     tmp_repo = repo
