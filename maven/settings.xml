@@ -9,6 +9,11 @@
             <username>lorislaborg</username>
             <password>${BINTRAY_API_KEY}</password>
         </server>
+        <server>
+            <id>bintray2</id>
+            <username>andrejpetras</username>
+            <password>${BINTRAY_API_KEY2}</password>
+        </server>
     </servers>
 
 </settings>
