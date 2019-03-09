@@ -14,5 +14,5 @@ fi
 echo $BUILD_VERSION
 
 # build
-mvn $MAVEN_CLI_OPTS -Prelease clean package
+mvn $MAVEN_CLI_OPTS -Prelease,docker clean package
 
