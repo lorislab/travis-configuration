@@ -5,4 +5,3 @@ export MAVEN_CLI_OPTS="-s .scripts/maven/settings.xml --batch-mode --errors --fa
 
 # build
 mvn $MAVEN_CLI_OPTS -Ptest-unit,release,docker clean package
-
